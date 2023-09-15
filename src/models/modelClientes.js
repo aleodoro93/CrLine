@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const Clientes = mongoose.model('Clientes',{
-    id_CPF: String, 
+    CPF: String, 
     nome: String,
     endereco: String,
     telefone: String,
