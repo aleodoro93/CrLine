@@ -2,11 +2,10 @@ import mongoose from "mongoose";
 
 const Fornecedores = mongoose.model('Fornecedores',{
     
-    id_CNPJ: String,
-    id_materiaPrima: String,
+    CNPJ: Number,
     produtos: String, 
     endereco: String,
-    telefone: String,
+    telefone: Number,
     email: String
 
 })

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const Produtos = mongoose.model('Produtos',{
-  id_produto: String,
+  id_produto: Number,
   tipoCostura: String,
   tamanhoFolha: String,
   tipoFolha: String,
