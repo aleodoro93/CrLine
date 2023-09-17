@@ -1,5 +1,5 @@
-import ClientesRepository from "ClientesRepository.js"
-import ValidacoesClientes from "ClienteServices.js"
+import ClientesRepository from "../repository/ClientesRepository.js"
+import ValidacoesClientes from "../services/ClientesServices.js"
 
 class ClientesController{
     static rotas(app){
@@ -27,7 +27,7 @@ class ClientesController{
 
         app.post("/clientes", async (req, res) => {
             try {
-                ValidacoesClientes.validaCliente(req.body.cpf, req.body.nome, req.body.telefone, req.body.email)
+                ValidacoesClientes.validaCliente(req.body.cpf, req.body.nome, req.body.endereco, req.body.telefone, req.body.email)
                 const cliente = req.body
                 const inserir = await ClientesRepository.criarCliente(cliente)
                 res.status(201).json(inserir)
