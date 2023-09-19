@@ -11,7 +11,7 @@ class Repository{
         return response
     }
 
-    static async findById(model){
+    static async findById(model, id){
         const response = await model.findOne({_id: id})
         return response
     }
