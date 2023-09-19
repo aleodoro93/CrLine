@@ -1,3 +1,4 @@
+import Fornecedores from "../models/modelFornecedores.js"
 import Repository from "./Repository.js"
 
 class FornecedoresRepository extends Repository{
