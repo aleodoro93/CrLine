@@ -1,11 +1,11 @@
-import Repository from "../repository/FornecedoresController.js"
-import ValidacoesFornecedores from "../services/FornecedoresService.js"
+import FornecedoresRepository from "../repository/FornecedoresRepository.js"
+
 
 class FornecedoresController {
     static rotas(app) {
         app.get("/fornecedores", async (req, res) => {
             try {
-                const fornecedores = await Repository.buscarFornecedores()
+                const fornecedores = await FornecedoresRepository.buscarFornecedores()
                 res.status(200).json(fornecedores)
             } catch (erro) {
                 res.status(404).json(erro.message)
@@ -14,7 +14,7 @@ class FornecedoresController {
 
         app.get("/fornecedores:id", async (req, res) => {
             try {
-                const fornecedores = await Repository.buscarFornecedoresPorId(req.params.id)
+                const fornecedores = await FornecedoresRepository.buscarFornecedoresPorId(req.params.id)
 
                 if (!materiaPrima) {
                     throw new Error("Fornecedores não encontrada para este ID")
@@ -31,7 +31,7 @@ class FornecedoresController {
 
                 const Fornecedores= req.body
 
-                const inserir = await Repository.criarFornecedores(Fornecedores)
+                const inserir = await FornecedoresRepository.criarFornecedores(Fornecedores)
 
                 res.status(201).json(inserir)
 
@@ -43,13 +43,13 @@ class FornecedoresController {
         app.delete("/fornecedores/:id", async (req, res) => {
             const id = req.params.id
             try {
-                const fornecedores = await Repository.buscarFornecedoresPorId(id)
+                const fornecedores = await FornecedoresRepository.buscarFornecedoresPorId(id)
 
                 if (!fornecedores) {
                     throw new Error("Fornecedores não encontrada")
                 }
 
-                const resposta = await Repository.deletarFornecedoresPorId(id)
+                const resposta = await FornecedoresRepository.deletarFornecedoresPorId(id)
 
                 res.status(200).json(resposta)
 
@@ -61,7 +61,7 @@ class FornecedoresController {
         app.patch("/fornecedores/:id", async (req, res) => {
             const id = req.params.id
             try {
-                const fornecedores = await Repository.buscarFornecedoresPorId(id)
+                const fornecedores = await FornecedoresRepository.buscarFornecedoresPorId(id)
 
                 if (!fornecedores) {
                     throw new Error("Fornecedores não encontrada para este ID")
@@ -69,7 +69,7 @@ class FornecedoresController {
 
                 const atualizacao = req.body
 
-                await Repository.atualizaFornecedoresPorId(id, atualizacao)
+                await FornecedoresRepository.atualizaFornecedoresPorId(id, atualizacao)
 
                 res.status(200).json({ message: "Fornecedores atualizada com sucesso" })
 

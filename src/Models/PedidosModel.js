@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const Pedidos = mongoose.model('Pedidos', {
     id_pedido: String,
-    id_CPF: Number,
+    CPF: String,
     quantia: String,
     data: Date
 
