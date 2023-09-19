@@ -1,4 +1,4 @@
-import EstoqueMateriaPrimaRepository from "../repository/EstoqueMateriaPrimaController.js"
+import EstoqueMateriaPrimaRepository from "../repository/EstoqueMateriaPrimaRepository.js"
 import ValidacoesEstoqueMateriaPrima from "../services/EstoqueMateriaPrimaService.js"
 
 class EstoqueMateriaPrimaController {
