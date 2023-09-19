@@ -1,5 +1,4 @@
 
-
 class ValidacoesFornecedores {
 
     static validaCnpj(cnpj) {
