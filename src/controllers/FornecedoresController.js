@@ -1,5 +1,5 @@
 import FornecedoresRepository from "../repository/FornecedoresRepository.js"
-
+import ValidacoesFornecedores from "../services/ValidacoesFornecedores.js"
 
 class FornecedoresController {
     static rotas(app) {
@@ -27,7 +27,7 @@ class FornecedoresController {
 
         app.post("/fornecedores", async (req, res) => {
             try {
-                fornecedores.validaFornecedores(req.body.cnpj, req.body.materiaPrima, req.body.produtos, req.body.razaoSocial, req.body.endereco, req.body.telefone, req.body.email)
+                ValidacoesFornecedores.validaFornecedores(req.body.CNPJ, req.body.produtos, req.body.razaoSocial, req.body.endereco, req.body.telefone, req.body.email)
 
                 const Fornecedores= req.body
 
