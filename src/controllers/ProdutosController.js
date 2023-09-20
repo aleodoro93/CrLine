@@ -7,8 +7,12 @@ class ProdutosController {
     static rotas(app){
 
         app.get("/produtos",async (req,res)=>{
-            const produto = await ProdutosRepository.buscarTodosProdutos()
-            res.status(200).json(produto)
+            try {
+                const produto = await ProdutosRepository.buscarTodosProdutos()
+                res.status(200).json(produto)
+            } catch (erro) {
+                res.status(404).json(erro.message)
+            }
         })
 
         app.get("/produtos/:id",async (req, res)=>{
