@@ -1,6 +1,7 @@
 import express from "express"
 import mongoose from "mongoose"
 import { config } from 'dotenv'
+import cors from "cors"
 
 import ClientesController from "./src/controllers/ClientesController.js"
 import PedidosController from "./src/controllers/PedidosController.js"
@@ -10,6 +11,7 @@ import EstoqueMateriaPrimaController from "./src/controllers/EstoqueMateriaPrima
 /**
  * INSTANCIANDO O METODO CONFIG DOTENV
  */
+
 config()
 
 /**
@@ -45,6 +47,8 @@ mongoose.connect(`mongodb+srv://${USER_DB}:${PASSWORD}@${CLUSTER}.${DATABASE}.mo
     .catch((e) => console.log(e.message))
 
 app.use(express.json())
+
+app.use(cors('*'))
 
 /** 
  * CHAMADA DAS ROTAS DOS CONTROLLERS

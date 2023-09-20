@@ -17,7 +17,7 @@ class Repository{
     }
 
     static async updateById(model, id, input){
-        await model.findOne({_id: id}, input)
+        await model.findOneAndUpdate({_id: id}, input)
         return {message: "Sucesso na atualização de registro", id}
     }
     

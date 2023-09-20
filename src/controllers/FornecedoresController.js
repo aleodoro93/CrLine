@@ -12,18 +12,17 @@ class FornecedoresController {
             }
         })
 
-        app.get("/fornecedores:id", async (req, res) => {
-            try {
-                const fornecedores = await FornecedoresRepository.buscarFornecedoresPorId(req.params.id)
-
-                if (!materiaPrima) {
-                    throw new Error("Fornecedores não encontrada para este ID")
-                }
-                res.status(200).json(fornecedores)
-            } catch (erro) {
-                res.status(404).json({ message: erro.message, id: req.params.id })
-            }
-        })
+        app.get("/fornecedores/:id", async (req, res) => {
+    try {
+        const fornecedores = await FornecedoresRepository.buscarFornecedorPorId(req.params.id)
+        if (!fornecedores) {
+            throw new Error("Fornecedores não encontrada para este ID")
+        }
+        res.status(200).json(fornecedores)
+    } catch (erro) {
+        res.status(404).json({ message: erro.message, id: req.params.id })
+    }
+})
 
         app.post("/fornecedores", async (req, res) => {
             try {
@@ -49,8 +48,7 @@ class FornecedoresController {
                     throw new Error("Fornecedores não encontrada")
                 }
 
-                const resposta = await FornecedoresRepository.deletarFornecedoresPorId(id)
-
+                const resposta = await FornecedoresRepository.deletaFornecedorPorId(id)
                 res.status(200).json(resposta)
 
             } catch (erro) {
@@ -61,18 +59,13 @@ class FornecedoresController {
         app.patch("/fornecedores/:id", async (req, res) => {
             const id = req.params.id
             try {
-                const fornecedores = await FornecedoresRepository.buscarFornecedoresPorId(id)
-
+                const fornecedores = await FornecedoresRepository.buscarFornecedorPorId(id)
                 if (!fornecedores) {
                     throw new Error("Fornecedores não encontrada para este ID")
                 }
-
                 const atualizacao = req.body
-
-                await FornecedoresRepository.atualizaFornecedoresPorId(id, atualizacao)
-
+                await FornecedoresRepository.atualizaFornecedorPorId(id, atualizacao)
                 res.status(200).json({ message: "Fornecedores atualizada com sucesso" })
-
             } catch (erro) {
                 res.status(400).json({ message: erro.message, id })
             }

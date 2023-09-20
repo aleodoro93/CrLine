@@ -9,6 +9,7 @@ class ClientesController{
                 const clientes = await ClientesRepository.buscarTodosClientes()
                 res.status(200).json(clientes)
             } catch (erro) {
+
                 res.status(404).json(erro.message)
             }
         })

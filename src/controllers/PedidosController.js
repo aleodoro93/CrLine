@@ -43,7 +43,7 @@ class PedidosController{
                 if (!pedido) {
                     throw new Error("Pedido não encontrado")
                 }
-                const resposta = await PedidosRepository.deletarPedidoPorId(req.params.id)
+                const resposta = await PedidosRepository.deletarPedidosPorId(req.params.id)
                 res.status(200).json(resposta)
             } catch (erro) {
                 res.status(404).json({ Erro: erro.message, id: req.params.id })
