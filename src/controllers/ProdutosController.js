@@ -1,4 +1,5 @@
-import ValidaProduto from "../services/ProdutosServices"
+import ProdutosRepository from "../repository/ProdutosRepository.js"
+import ValidaProduto from "../services/ProdutosServices.js"
 
 class ProdutosController {
     
@@ -65,3 +66,4 @@ class ProdutosController {
     }
 }
 
+export default ProdutosController;
