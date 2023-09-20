@@ -51,8 +51,8 @@ class ValidacoesFornecedores {
     }
 
     static validaFornecedores(cnpj, produtos, razaoSocial, endereco, telefone, email){
-        const valido = this.validaCnpj(cnpj) && this.validaProdutos(produtos) &&
-        this.razaoSocial(razaoSocial) && this.validaEndereco(endereco) && this.validaTelefone(telefone) && this.validaEmail(email)
+        const valido = this.validaCnpj(cnpj) && this.validaDescricaoProdutos(produtos) &&
+        this.validaRazaoSocial(razaoSocial) && this.validaEndereco(endereco) && this.validaTelefone(telefone) && this.validaEmail(email)
         if(valido){
             return true;
         }else{

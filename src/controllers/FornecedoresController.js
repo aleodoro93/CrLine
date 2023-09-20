@@ -1,11 +1,11 @@
 import FornecedoresRepository from "../repository/FornecedoresRepository.js"
-import ValidacoesFornecedores from "../services/ValidacoesFornecedores.js"
+import ValidacoesFornecedores from "../services/FornecedoresServices.js"
 
 class FornecedoresController {
     static rotas(app) {
         app.get("/fornecedores", async (req, res) => {
             try {
-                const fornecedores = await FornecedoresRepository.buscarFornecedores()
+                const fornecedores = await FornecedoresRepository.buscarTodosOsFornecedores()
                 res.status(200).json(fornecedores)
             } catch (erro) {
                 res.status(404).json(erro.message)
