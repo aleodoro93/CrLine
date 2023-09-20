@@ -4,7 +4,9 @@ import { config } from 'dotenv'
 
 import ClientesController from "./src/controllers/ClientesController.js"
 import PedidosController from "./src/controllers/PedidosController.js"
-
+import ProdutosController from "./src/controllers/ProdutosController.js"
+import FornecedoresController from "./src/controllers/FornecedoresController.js"
+import EstoqueMateriaPrimaController from "./src/controllers/EstoqueMateriaPrimaController.js"
 /**
  * INSTANCIANDO O METODO CONFIG DOTENV
  */
@@ -34,13 +36,13 @@ const CLUSTER = process.env.CLUSTER || "local"
  * LEVANTE DO SERVIDOR
  */
 mongoose.connect(`mongodb+srv://${USER_DB}:${PASSWORD}@${CLUSTER}.${DATABASE}.mongodb.net/`)
-// THEN E CATCH PARA PEGAR POSSÍVEIS ERROS
-.then(()=>{
-    app.listen(port,()=>{
-        console.log(`Servidor online na porta ${port}`)
+    // THEN E CATCH PARA PEGAR POSSÍVEIS ERROS
+    .then(() => {
+        app.listen(port, () => {
+            console.log(`Servidor online na porta ${port}`)
+        })
     })
-})
-.catch((e)=>console.log(e.message))
+    .catch((e) => console.log(e.message))
 
 app.use(express.json())
 
@@ -49,3 +51,6 @@ app.use(express.json())
 */
 ClientesController.rotas(app)
 PedidosController.rotas(app)
+ProdutosController.rotas(app)
+FornecedoresController.rotas(app)
+EstoqueMateriaPrimaController.rotas(app)

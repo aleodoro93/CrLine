@@ -1,7 +1,8 @@
 class ValidaProduto {
 
     static validaTipoCostura(tipoCostura){
-        if (tipoCostura.values === "grimorio"||tipoCostura.values === "copta"||tipoCostura.values === "moleskine"||tipoCostura.values === "midori"||tipoCostura.values === "espiral") {
+        const costuraIsValid = tipoCostura === "grimorio"||tipoCostura === "copta"||tipoCostura === "moleskine"||tipoCostura === "midori"||tipoCostura === "espiral"
+        if (costuraIsValid) {
             return true
         } else{
             throw new Error("Tipo de costura inválido")
@@ -10,7 +11,8 @@ class ValidaProduto {
     }
 
     static validaTamanhoFolha(tamanhoFolha){
-        if (tamanhoFolha.values === "A4"||tamanhoFolha.values === "A5"||tamanhoFolha.values === "A6") {
+        const folhaIsValid = tamanhoFolha === "A4"||tamanhoFolha === "A5"||tamanhoFolha === "A6"
+        if (folhaIsValid) {
             return true
         } else {
             throw new Error("Tamanho de folha inválido")
@@ -18,7 +20,8 @@ class ValidaProduto {
     }
 
     static validaTipoFolha(tipoFolha){
-        if (tipoFolha.values === "offset"||tipoFolha.values === "sulfite"||tipoFolha.values === "reciclado"||tipoFolha.values === "marfim"||tipoFolha.values === "sahara") {
+        const tipoFolhaIsValid = tipoFolha === "offset"||tipoFolha === "sulfite"||tipoFolha === "reciclado"||tipoFolha === "marfim"||tipoFolha === "sahara"
+        if (tipoFolhaIsValid) {
             return true
         } else {
             throw new Error("Tipo de folha inválido")
@@ -26,7 +29,8 @@ class ValidaProduto {
     }
 
     static validaGramaturaFolha(gramaturaFolha){
-        if (gramaturaFolha === "75"||gramaturaFolha === "90"||gramaturaFolha === "120"||gramaturaFolha === "180") {
+        const gramaturaFolhaisValid = gramaturaFolha === "75"||gramaturaFolha === "90"||gramaturaFolha === "120"||gramaturaFolha === "180"
+        if (gramaturaFolhaisValid) {
             return true
         } else {
             throw new Error("Gramatura inválida")
@@ -41,7 +45,8 @@ class ValidaProduto {
         }
     }
     static validaTipoPauta(tipoPauta){
-        if (tipoPauta.values === "lisa"||tipoPauta.values === "pautada"||tipoPauta.values === "quadriculada"||tipoPauta.values === "pontilhada") {
+        const tipoPautaIsValid = tipoPauta === "lisa"||tipoPauta === "pautada"||tipoPauta === "quadriculada"||tipoPauta === "pontilhada"
+        if (tipoPautaIsValid) {
             return true
         } else {
             throw new Error("Tipo de pauta inválida")
@@ -49,7 +54,8 @@ class ValidaProduto {
     }
 
     static validaTemEstoque(temNoEstoque,quantiaNoEstoque){
-        if (temNoEstoque && quantiaNoEstoque > 0) {
+        const temNoEstoqueIsValid = temNoEstoque && quantiaNoEstoque > 0
+        if (temNoEstoqueIsValid) {
             return "Item em estoque"
     } else {
         throw new Error("Não tem em estoque")

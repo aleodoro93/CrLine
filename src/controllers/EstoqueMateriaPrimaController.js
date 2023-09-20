@@ -27,7 +27,7 @@ class EstoqueMateriaPrimaController {
 
         app.post("/estoque-materia-prima", async (req, res) => {
             try {
-                ValidacoesEstoqueMateriaPrima.validaMateriaPrima(req.body.descricao, req.body.quantia, req.body.fornecedores)
+                ValidacoesEstoqueMateriaPrima.validaMaterial(req.body.descricao, req.body.quantia, req.body.fornecedores)
 
                 const materiaPrima = req.body
 

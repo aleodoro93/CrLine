@@ -1,5 +1,6 @@
 import ProdutosRepository from "../repository/ProdutosRepository.js"
-import ValidaProduto from "../services/ProdutosServices.js"
+
+import ValidacoesProdutos from "../services/ProdutosServices.js"
 
 class ProdutosController {
     
@@ -7,7 +8,7 @@ class ProdutosController {
 
         app.get("/produtos",async (req,res)=>{
             const produto = await ProdutosRepository.buscarTodosProdutos()
-            res.status(200).json(produtos)
+            res.status(200).json(produto)
         })
 
         app.get("/produtos/:id",async (req, res)=>{
@@ -16,7 +17,7 @@ class ProdutosController {
             if(!produto){
                 throw new Error("O id desse produto não existe")
             }
-            res.status(200).json(produtos)
+            res.status(200).json(produto)
         }catch{
             res.status(404).json({ message: erro.message, id: req.params.id })
         } 
@@ -24,10 +25,10 @@ class ProdutosController {
 
         app.post("/produtos",async(req,res)=>{
             try{
-                await ValidaProduto.validaProduto(req.body)
+                ValidacoesProdutos.validaProduto(req.body.tipoCostura, req.body.tamanhoFolha, req.body.tipoFolha, req.body.gramaturaFolha, req.body.tipoCapa, req.body.tipoPauta, req.body.temNoEstoque, req.body.quantiaNoEstoque)
                 const inserir = await ProdutosRepository.criarProduto(req.body)
                 res.status(201).json(inserir)
-            }catch{
+            }catch(erro){
                 res.status(400).json({ message: erro.message })
             }
 

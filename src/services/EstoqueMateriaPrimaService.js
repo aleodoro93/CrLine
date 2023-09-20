@@ -16,7 +16,7 @@ class ValidacoesEstoqueMateriaPrima {
     }
 
     static validaFornecedores(fornecedores) {
-        if (Array.isArray(fornecedores) && fornecedores.length > 0) {
+        if (Array.isArray(fornecedores)) {
             return true;
         } else {
             throw new Error("Fornecedores inválidos, deve ser uma matriz não vazia");
