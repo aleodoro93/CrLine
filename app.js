@@ -3,6 +3,7 @@ import mongoose from "mongoose"
 import { config } from 'dotenv'
 
 import ClientesController from "./src/controllers/ClientesController.js"
+import PedidosController from "./src/controllers/PedidosController.js"
 
 /**
  * INSTANCIANDO O METODO CONFIG DOTENV
@@ -47,3 +48,4 @@ app.use(express.json())
  * CHAMADA DAS ROTAS DOS CONTROLLERS
 */
 ClientesController.rotas(app)
+PedidosController.rotas(app)
