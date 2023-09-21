@@ -63,8 +63,28 @@ class FornecedoresController {
                 if (!fornecedores) {
                     throw new Error("Fornecedores não encontrada para este ID")
                 }
-                const atualizacao = req.body
-                await FornecedoresRepository.atualizaFornecedorPorId(id, atualizacao)
+                const data = req.body
+
+                if (data._id || data.CNPJ || data.__v){
+                    throw new Error("Contém um atributo que não pode ser alterado")
+                }
+                if (data.produtos){
+                    ValidacoesFornecedores.validaDescricaoProdutos(data.produtos)
+                }
+                if (data.razaoSocial){
+                    ValidacoesFornecedores.validaRazaoSocial(data.razaoSocial)
+                }
+                if (data.endereco){
+                    ValidacoesFornecedores.validaEndereco(data.endereco)
+                }
+                if (data.telefone){
+                    ValidacoesFornecedores.validaTelefone(data.telefone)
+                }
+                if (data.email){
+                    ValidacoesFornecedores.validaEmail(data.email)
+                }
+                
+                await FornecedoresRepository.atualizaFornecedorPorId(id, data)
                 res.status(200).json({ message: "Fornecedores atualizada com sucesso" })
             } catch (erro) {
                 res.status(400).json({ message: erro.message, id })

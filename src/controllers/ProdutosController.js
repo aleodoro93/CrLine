@@ -17,14 +17,14 @@ class ProdutosController {
 
         app.get("/produtos/:id",async (req, res)=>{
             try{
-            const produto = ProdutosRepository.buscarProdutoPorId(req.params.id)
-            if(!produto){
-                throw new Error("O id desse produto não existe")
-            }
-            res.status(200).json(produto)
-        }catch{
-            res.status(404).json({ message: erro.message, id: req.params.id })
-        } 
+                const produto = await ProdutosRepository.buscarProdutoPorId(req.params.id)
+                if(!produto){
+                    throw new Error("O id desse produto não existe")
+                }
+                res.status(200).json(produto)
+            }catch{
+                res.status(404).json({ message: erro.message, id: req.params.id })
+            } 
         })
 
         app.post("/produtos",async(req,res)=>{
