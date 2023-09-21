@@ -1,10 +1,31 @@
 class ValidacoesPedidos {
 
     static validaCPF(cpf){
-        if (cpf.length >= 3){
-            return true
+        cpf = cpf.replace(/[^\d]/g, '');
+
+        if (cpf.length !== 11) {
+            throw new Error("CPF inválido, quantia inválida de digitos")
+        }
+
+        if (/^(\d)\1{10}$/.test(cpf)) {
+            throw new Error("CPF inválido, digitos repetidos")
+        }
+
+        let soma1 = 0;
+        let soma2 = 0;
+        for (let i = 0; i < 9; i++) {
+            soma1 += parseInt(cpf.charAt(i)) * (10 - i);
+            soma2 += parseInt(cpf.charAt(i)) * (11 - i);
+        }
+        soma2 += parseInt(cpf.charAt(9)) * 2;
+
+        const digito1 = (soma1 * 10) % 11;
+        const digito2 = (soma2 * 10) % 11;
+
+        if (digito1 === parseInt(cpf.charAt(9)) && digito2 === parseInt(cpf.charAt(10))) {
+            return true;
         } else {
-            throw new Error("CPF inválido, deve ser apenas números")
+            throw new Error("CPF inválido")
         }
     }
 
