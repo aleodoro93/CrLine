@@ -47,6 +47,32 @@ class ProdutosController {
                 }
             
                 const data = req.body;
+
+                if (data._id || data.__v){
+                    throw new Error("Contém um atributo que não pode ser alterado")
+                }
+                if (data.tipoCostura){
+                    ValidacoesProdutos.validaTipoCostura(data.tipoCostura)
+                }
+                if (data.tamanhoFolha){
+                    ValidacoesProdutos.validaTamanhoFolha(data.tamanhoFolha)
+                }
+                if (data.tipoFolha){
+                    ValidacoesProdutos.validaTipoFolha(data.tipoFolha)
+                }
+                if (data.gramaturaFolha){
+                    ValidacoesProdutos.validaGramaturaFolha(data.gramaturaFolha)
+                }
+                if (data.tipoCapa){
+                    ValidacoesProdutos.validaTipoCapa(data.tipoCapa)
+                }
+                if (data.tipoPauta){
+                    ValidacoesProdutos.validaTipoPauta(data.tipoPauta)
+                }
+                if (data.temNoEstoque || data.quantiaNoEstoque){
+                    ValidacoesProdutos.validaTemEstoque(data.temNoEstoque, data.quantiaNoEstoque)
+                }
+
                 await ProdutosRepository.atualizarProdutoPorId(req.params.id, data);
             
                 res.status(200).json({ message: "Produto atualizado com sucesso" });
