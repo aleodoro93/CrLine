@@ -161,13 +161,14 @@ Para configurar o ambiente de desenvolvimento, abra o terminal e siga essas etap
  - Sucesso
  
 ```js
-[
-   {     "telefone": "41940028922" }
+{
+	"tipoCostura": "grimorio"
+}
+
 
 {
-    "message": "Cliente atualizado com sucesso"
+	"message": "Produto atualizado com sucesso"
 }
-]
 
 ```
  - Erro
