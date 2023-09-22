@@ -67,9 +67,22 @@ class EstoqueMateriaPrimaController {
                     throw new Error("Matéria-prima não encontrada para este ID")
                 }
 
-                const atualizacao = req.body
+                const data = req.body
 
-                await EstoqueMateriaPrimaRepository.atualizarMateriaPrimaPorId(id, atualizacao)
+                if (data._id || data.id_materiaPrima || data.__v){
+                    throw new Error("Contém um atributo que não pode ser alterado")
+                }
+                if (data.descricao){
+                    ValidacoesEstoqueMateriaPrima.validaDescricao(data.descricao)
+                }
+                if (data.quantia){
+                    ValidacoesEstoqueMateriaPrima.validaQuantia(data.quantia)
+                }
+                if (data.fornecedores){
+                    ValidacoesEstoqueMateriaPrima.validaFornecedores(data.fornecedores)
+                }
+
+                await EstoqueMateriaPrimaRepository.atualizarMateriaPrimaPorId(id, data)
 
                 res.status(200).json({ message: "Matéria-prima atualizada com sucesso" })
 

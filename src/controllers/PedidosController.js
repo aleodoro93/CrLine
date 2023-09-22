@@ -57,6 +57,14 @@ class PedidosController{
                     throw new Error("Id do pedido está inválido ou não cadastrado")
                 }
                 const data = req.body
+
+                if (data._id || data.CPF || data.data || data.__v){
+                    throw new Error("Contém um atributo que não pode ser alterado")
+                }
+                if (data.quantia){
+                    ValidacoesPedidos.validaQuantia(data.quantia)
+                }
+
                 await PedidosRepository.atualizarPedidosPorId(req.params.id, data)
                 res.status(200).json({ message: "pedido atualizado com sucesso" })
             } catch (erro) {
