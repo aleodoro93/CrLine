@@ -10,7 +10,8 @@ const Produtos = mongoose.model('Produtos',{
   tipoCapa: String,
   tipoPauta: String,
   temNoEstoque: Boolean,
-  quantiaNoEstoque: Number
+  quantiaNoEstoque: Number,
+  imagensProduto: Array
 })
 
 export default Produtos;

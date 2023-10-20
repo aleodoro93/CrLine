@@ -57,19 +57,47 @@ class ValidaProduto {
         const temNoEstoqueIsValid = temNoEstoque && quantiaNoEstoque > 0
         if (temNoEstoqueIsValid) {
             return "Item em estoque"
-    } else {
-        throw new Error("Não tem em estoque")
+        } else {
+            throw new Error("Não tem em estoque")
+        }
     }
-}
 
-static validaProduto(tipoCostura,tamanhoFolha,tipoFolha,gramaturaFolha,tipoCapa,tipoPauta,temNoEstoque,quantiaNoEstoque){
-    const valido = this.validaTipoCostura(tipoCostura) && this.validaTamanhoFolha(tamanhoFolha) && this.validaTipoFolha(tipoFolha) && this.validaGramaturaFolha(gramaturaFolha) && this.validaTipoCapa(tipoCapa) && this.validaTipoPauta(tipoPauta) && this.validaTemEstoque(temNoEstoque,quantiaNoEstoque)
-    if (valido) {
-        return true
-    } else {
-        throw new Error("Produto inválido")
+    static isValidBase64Image(input) {
+        if (typeof input === 'string' && input.startsWith('data:image') && input.includes(',')) {
+            const parts = input.split(',');
+            if (parts.length === 2) {
+                const base64String = parts[1];
+                try {
+                    atob(base64String);
+                    return true;
+                } catch (e) {
+                    return false;
+                }
+            }
+        }
+        return false;
     }
-}
+
+    static validateBase64Images(imageArray) {
+        return imageArray.every(this.isValidBase64Image);
+    }
+
+    static validaProduto(data) {
+        const valido =
+            this.validaTipoCostura(data.tipoCostura) &&
+            this.validaTamanhoFolha(data.tamanhoFolha) &&
+            this.validaTipoFolha(data.tipoFolha) &&
+            this.validaGramaturaFolha(data.gramaturaFolha) &&
+            this.validaTipoCapa(data.tipoCapa) &&
+            this.validaTipoPauta(data.tipoPauta) &&
+            this.validaTemEstoque(data.temNoEstoque, data.quantiaNoEstoque) &&
+            this.validateBase64Images(data.imagensProduto)
+        if (valido) {
+            return true
+        } else {
+            throw new Error("Produto inválido")
+        }
+    }
 
 }
 
