@@ -62,26 +62,6 @@ class ValidaProduto {
         }
     }
 
-    static isValidBase64Image(input) {
-        if (typeof input === 'string' && input.startsWith('data:image') && input.includes(',')) {
-            const parts = input.split(',');
-            if (parts.length === 2) {
-                const base64String = parts[1];
-                try {
-                    atob(base64String);
-                    return true;
-                } catch (e) {
-                    return false;
-                }
-            }
-        }
-        return false;
-    }
-
-    static validateBase64Images(imageArray) {
-        return imageArray.every(this.isValidBase64Image);
-    }
-
     static validaProduto(data) {
         const valido =
             this.validaTipoCostura(data.tipoCostura) &&
@@ -90,8 +70,7 @@ class ValidaProduto {
             this.validaGramaturaFolha(data.gramaturaFolha) &&
             this.validaTipoCapa(data.tipoCapa) &&
             this.validaTipoPauta(data.tipoPauta) &&
-            this.validaTemEstoque(data.temNoEstoque, data.quantiaNoEstoque) &&
-            this.validateBase64Images(data.imagensProduto)
+            this.validaTemEstoque(data.temNoEstoque, data.quantiaNoEstoque)
         if (valido) {
             return true
         } else {
