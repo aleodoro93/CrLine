@@ -57,19 +57,26 @@ class ValidaProduto {
         const temNoEstoqueIsValid = temNoEstoque && quantiaNoEstoque > 0
         if (temNoEstoqueIsValid) {
             return "Item em estoque"
-    } else {
-        throw new Error("Não tem em estoque")
+        } else {
+            throw new Error("Não tem em estoque")
+        }
     }
-}
 
-static validaProduto(tipoCostura,tamanhoFolha,tipoFolha,gramaturaFolha,tipoCapa,tipoPauta,temNoEstoque,quantiaNoEstoque){
-    const valido = this.validaTipoCostura(tipoCostura) && this.validaTamanhoFolha(tamanhoFolha) && this.validaTipoFolha(tipoFolha) && this.validaGramaturaFolha(gramaturaFolha) && this.validaTipoCapa(tipoCapa) && this.validaTipoPauta(tipoPauta) && this.validaTemEstoque(temNoEstoque,quantiaNoEstoque)
-    if (valido) {
-        return true
-    } else {
-        throw new Error("Produto inválido")
+    static validaProduto(data) {
+        const valido =
+            this.validaTipoCostura(data.tipoCostura) &&
+            this.validaTamanhoFolha(data.tamanhoFolha) &&
+            this.validaTipoFolha(data.tipoFolha) &&
+            this.validaGramaturaFolha(data.gramaturaFolha) &&
+            this.validaTipoCapa(data.tipoCapa) &&
+            this.validaTipoPauta(data.tipoPauta) &&
+            this.validaTemEstoque(data.temNoEstoque, data.quantiaNoEstoque)
+        if (valido) {
+            return true
+        } else {
+            throw new Error("Produto inválido")
+        }
     }
-}
 
 }
 

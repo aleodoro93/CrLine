@@ -29,7 +29,7 @@ class ProdutosController {
 
         app.post("/produtos",async(req,res)=>{
             try{
-                ValidacoesProdutos.validaProduto(req.body.tipoCostura, req.body.tamanhoFolha, req.body.tipoFolha, req.body.gramaturaFolha, req.body.tipoCapa, req.body.tipoPauta, req.body.temNoEstoque, req.body.quantiaNoEstoque)
+                ValidacoesProdutos.validaProduto(req.body)
                 const inserir = await ProdutosRepository.criarProduto(req.body)
                 res.status(201).json(inserir)
             }catch(erro){

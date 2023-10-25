@@ -1,37 +1,6 @@
 
 class ValidacoesClientes {
 
-    static validaCPF(cpf){
-
-        cpf = cpf.replace(/[^\d]/g, '');
-
-        if (cpf.length !== 11) {
-            throw new Error("CPF inválido, quantia inválida de digitos")
-        }
-
-        if (/^(\d)\1{10}$/.test(cpf)) {
-            throw new Error("CPF inválido, digitos repetidos")
-        }
-
-        let soma1 = 0;
-        let soma2 = 0;
-        for (let i = 0; i < 9; i++) {
-            soma1 += parseInt(cpf.charAt(i)) * (10 - i);
-            soma2 += parseInt(cpf.charAt(i)) * (11 - i);
-        }
-        soma2 += parseInt(cpf.charAt(9)) * 2;
-
-        const digito1 = (soma1 * 10) % 11;
-        const digito2 = (soma2 * 10) % 11;
-
-        if (digito1 === parseInt(cpf.charAt(9)) && digito2 === parseInt(cpf.charAt(10))) {
-            return true;
-        } else {
-            throw new Error("CPF inválido")
-        }
-
-    }
-
     static validaNome(nome){
         const regexNome = /^[a-zA-ZÀ-ú\s']+$/;
         if (regexNome.test(nome)){
@@ -41,23 +10,12 @@ class ValidacoesClientes {
         }
     }
 
-    static validaEndereco(endereco){
-        if (endereco.length >= 3){
+    static validaSobrenome(sobrenome){
+        const regexNome = /^[a-zA-ZÀ-ú\s']+$/;
+        if (regexNome.test(sobrenome)){
             return true
         } else {
-            throw new Error("Endereço inválido, deve ter no mínimo 3 caracteres")
-        }
-    }
-
-    static validaTelefone(telefone){
-        const numeroLimpo = telefone.replace(/[^\d]/g, '');
-        const telefoneInt = parseInt(numeroLimpo)
-        const regexTelefone = /^[0-9]{10,11}$/
-
-        if (regexTelefone.test(telefoneInt)){
-            return true
-        } else {
-            throw new Error("Telefone inválido")
+            throw new Error("Sobrenome inválido, apenas letras")
         }
     }
 
@@ -69,9 +27,17 @@ class ValidacoesClientes {
             throw new Error("E-mail inválido");
         }
     }
+
+    static validaSenha(senha) {
+        if (senha > 8) {
+            return true;
+        } else {
+            throw new Error("E-mail inválido");
+        }
+    }
     
-    static validaCliente(CPF, nome, endereco, telefone, email){
-        const ehValido = this.validaCPF(CPF) && this.validaNome(nome) && this.validaEndereco(endereco) && this.validaTelefone(telefone) && this.validaEmail(email)
+    static validaCliente(cliente){
+        const ehValido = this.validaNome(cliente.nome) && this.validaSobrenome(cliente.sobrenome) && this.validaEmail(cliente.email) && this.validaSenha(cliente.senha)
         if (ehValido) {
             return true;
         } else {
