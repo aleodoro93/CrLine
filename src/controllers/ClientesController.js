@@ -28,8 +28,8 @@ class ClientesController{
 
         app.post("/clientes", async (req, res) => {
             try {
-                ValidacoesClientes.validaCliente(req.body.CPF, req.body.nome, req.body.endereco, req.body.telefone, req.body.email)
                 const cliente = req.body
+                ValidacoesClientes.validaCliente(cliente)
                 const inserir = await ClientesRepository.criarCliente(cliente)
                 res.status(201).json(inserir)
             } catch (erro) {
