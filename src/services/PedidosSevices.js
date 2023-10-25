@@ -1,31 +1,23 @@
 class ValidacoesPedidos {
 
-    static validaCPF(cpf){
-        if (cpf.length >= 3){
+    static validaIdCliente(idCliente){
+        if (idCliente.length >= 3){
             return true
         } else {
-            throw new Error("CPF inválido, deve ser apenas números")
+            throw new Error("idCliente inválido")
         }
     }
 
-    static validaQuantia(quantia){
-        if (quantia.length >= 3){
+    static validaProdutosPedido(produtosPedido){
+        if (produtosPedido.length > 0){
             return true
         } else {
-            throw new Error("Quantia inválido, deve ter no mínimo 3 caracteres")
+            throw new Error("produtosPedido inválido")
         }
     }
 
-    static validaData(data){
-        if (data.length >= 3){
-            return true
-        } else {
-            throw new Error("Data inválida, deve ter no mínimo 3 caracteres")
-        }
-    }
-
-    static validaPedidos(CPF, quantia, data){
-        const ehValido = this.validaCPF(CPF) && this.validaQuantia(quantia) && this.validaData(data)
+    static validaPedidos(data){
+        const ehValido = this.validaIdCliente(data.idCliente) && this.validaProdutosPedido(data.produtosPedido)
         if (ehValido) {
             return true;
         } else {

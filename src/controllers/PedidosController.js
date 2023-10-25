@@ -27,12 +27,11 @@ class PedidosController{
 
         app.post("/pedidos", async (req, res) => {
             try {
-                ValidacoesPedidos.validaPedidos(req.body.CPF, req.body.quantia, req.body.data)
                 const pedido = req.body
+                ValidacoesPedidos.validaPedidos(pedido)
                 const inserir = await PedidosRepository.criarPedidos(pedido)
                 res.status(201).json(inserir)
             } catch (erro) {
-            
                 res.status(400).json({ message: erro.message })
             }
         })
