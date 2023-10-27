@@ -32,7 +32,7 @@ class ValidacoesClientes {
         if (senha > 8) {
             return true;
         } else {
-            throw new Error("E-mail inválido");
+            throw new Error("Senha inválida");
         }
     }
     

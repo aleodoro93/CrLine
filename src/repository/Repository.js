@@ -16,6 +16,11 @@ class Repository{
         return response
     }
 
+    static async findByKey(model, key, value){
+        const response = await model.findOne({[key]: value})
+        return response
+    }
+
     static async updateById(model, id, input){
         await model.findOneAndUpdate({_id: id}, input)
         return {message: "Sucesso na atualização de registro", id}

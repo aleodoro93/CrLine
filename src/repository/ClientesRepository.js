@@ -18,6 +18,11 @@ class ClientesRepository extends Repository{
         return response
     }
 
+    static async buscarClientePorChave(key, data){
+        const response = await Repository.findByKey(Clientes, key, data)
+        return response
+    }
+
     static async atualizarClientePorId(id, data){
         const response = await Repository.updateById(Clientes, id, data)
         return response
