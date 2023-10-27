@@ -79,6 +79,34 @@ class ClientesController{
             }
         })
 
+        app.post("/clientes/login", async (req, res) => {
+            try {
+                if (!req.body) throw new Error("Erro! Verifique os dados")
+
+                const email = req.body.email
+                const senha = req.body.senha
+
+                ValidacoesClientes.validaEmail(email)
+                ValidacoesClientes.validaSenha(senha)
+
+                const resposta = await ClientesRepository.buscarClientePorChave( "email", email )
+
+                if (!resposta) throw new Error("E-mail não cadastrado")
+                if (resposta.senha != senha) throw new Error("Senha incorreta")
+                
+                res.status(200).json({ message: "Cliente logado com sucesso"})
+
+            } catch (e) {
+                if (e.message == "Erro! Verifique os dados") {
+                    res.status(400).json({ status: 400, message: e.message })
+                } else if (e.message == "Senha incorreta") {
+                    res.status(401).json({ status: 401, message: e.message })
+                } else {
+                    res.status(404).json({ status: 404, message: e.message })
+                }
+            }
+        })
+
     }
 }
 
