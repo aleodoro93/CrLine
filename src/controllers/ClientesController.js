@@ -94,7 +94,7 @@ class ClientesController{
                 if (!resposta) throw new Error("E-mail não cadastrado")
                 if (resposta.senha != senha) throw new Error("Senha incorreta")
                 
-                res.status(200).json({ message: "Cliente logado com sucesso"})
+                res.status(200).json({ message: "Cliente logado com sucesso", id: resposta.id})
 
             } catch (e) {
                 if (e.message == "Erro! Verifique os dados") {
