@@ -18,6 +18,11 @@ class PedidosRepository extends Repository{
         return response
     }
 
+    static async buscarPedidosPorChave(key, data){
+        const response = await Repository.findAllByKey(Pedidos, key, data)
+        return response
+    }
+    
     static async atualizarPedidosPorId(id, data){
         const response = await Repository.updateById(Pedidos, id, data)
         return response

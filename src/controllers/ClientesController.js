@@ -1,5 +1,6 @@
 import ClientesRepository from "../repository/ClientesRepository.js"
 import ValidacoesClientes from "../services/ClientesServices.js"
+import PedidosRepository from "../repository/PedidosRespository.js"
 
 class ClientesController{
     static rotas(app){
@@ -104,6 +105,19 @@ class ClientesController{
                 } else {
                     res.status(404).json({ status: 404, message: e.message })
                 }
+            }
+        })
+
+        app.get("/clientes/:id/pedidos", async (req, res) => {
+            try {
+                const cliente = await ClientesRepository.buscarClientePorId(req.params.id)
+                if (!cliente) throw new Error("Id do cliente está inválido ou não cadastrado")
+
+                const pedidos = await PedidosRepository.buscarPedidosPorChave("idCliente", cliente._id)
+
+                res.status(200).json({ pedidos });
+            } catch (erro) {
+                res.status(404).json({ message: erro.message, id: req.params.id })
             }
         })
 
