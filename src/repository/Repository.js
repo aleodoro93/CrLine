@@ -11,6 +11,11 @@ class Repository{
         return response
     }
 
+    static async findAllByKey(model, key, value){
+        const response = await model.find({[key]: value})
+        return response
+    }
+
     static async findById(model, id){
         const response = await model.findOne({_id: id})
         return response

@@ -1,5 +1,6 @@
 import ClientesRepository from "../repository/ClientesRepository.js"
 import ValidacoesClientes from "../services/ClientesServices.js"
+import PedidosRepository from "../repository/PedidosRespository.js"
 
 class ClientesController{
     static rotas(app){
@@ -57,20 +58,20 @@ class ClientesController{
                     throw new Error("Id do cliente está inválido ou não cadastrado")
                 }
                 const data = req.body
-                if (data._id || data.CPF || data.__v){
+                if (data._id || data.__v){
                     throw new Error("Contém um atributo que não pode ser alterado")
                 }
                 if (data.nome){
                     ValidacoesClientes.validaNome(data.nome)
                 }
-                if (data.endereco){
-                    ValidacoesClientes.validaEndereco(data.endereco)
-                }
-                if (data.telefone){
-                    ValidacoesClientes.validaTelefone(data.telefone)
+                if (data.sobrenome){
+                    ValidacoesClientes.validaSobrenome(data.sobrenome)
                 }
                 if (data.email){
                     ValidacoesClientes.validaEmail(data.email)
+                }
+                if (data.senha){
+                    ValidacoesClientes.validaSenha(data.senha)
                 }
                 await ClientesRepository.atualizarClientePorId(req.params.id, data)
                 res.status(200).json({ message: "Cliente atualizado com sucesso" })
@@ -94,7 +95,7 @@ class ClientesController{
                 if (!resposta) throw new Error("E-mail não cadastrado")
                 if (resposta.senha != senha) throw new Error("Senha incorreta")
                 
-                res.status(200).json({ message: "Cliente logado com sucesso"})
+                res.status(200).json({ message: "Cliente logado com sucesso", id: resposta.id})
 
             } catch (e) {
                 if (e.message == "Erro! Verifique os dados") {
@@ -104,6 +105,19 @@ class ClientesController{
                 } else {
                     res.status(404).json({ status: 404, message: e.message })
                 }
+            }
+        })
+
+        app.get("/clientes/:id/pedidos", async (req, res) => {
+            try {
+                const cliente = await ClientesRepository.buscarClientePorId(req.params.id)
+                if (!cliente) throw new Error("Id do cliente está inválido ou não cadastrado")
+
+                const pedidos = await PedidosRepository.buscarPedidosPorChave("idCliente", cliente._id)
+
+                res.status(200).json({ pedidos });
+            } catch (erro) {
+                res.status(404).json({ message: erro.message, id: req.params.id })
             }
         })
 
