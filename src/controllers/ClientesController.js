@@ -58,20 +58,20 @@ class ClientesController{
                     throw new Error("Id do cliente está inválido ou não cadastrado")
                 }
                 const data = req.body
-                if (data._id || data.CPF || data.__v){
+                if (data._id || data.__v){
                     throw new Error("Contém um atributo que não pode ser alterado")
                 }
                 if (data.nome){
                     ValidacoesClientes.validaNome(data.nome)
                 }
-                if (data.endereco){
-                    ValidacoesClientes.validaEndereco(data.endereco)
-                }
-                if (data.telefone){
-                    ValidacoesClientes.validaTelefone(data.telefone)
+                if (data.sobrenome){
+                    ValidacoesClientes.validaSobrenome(data.sobrenome)
                 }
                 if (data.email){
                     ValidacoesClientes.validaEmail(data.email)
+                }
+                if (data.senha){
+                    ValidacoesClientes.validaSenha(data.senha)
                 }
                 await ClientesRepository.atualizarClientePorId(req.params.id, data)
                 res.status(200).json({ message: "Cliente atualizado com sucesso" })
