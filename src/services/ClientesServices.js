@@ -29,7 +29,7 @@ class ValidacoesClientes {
     }
 
     static validaSenha(senha) {
-        if (senha > 8) {
+        if (senha.length >= 8) {
             return true;
         } else {
             throw new Error("Senha inválida");
